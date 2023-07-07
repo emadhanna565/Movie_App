@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static Color primaryColor = Color(0xff121312);
+  static const Color accentColor = Color(0xff282A28);
   static ThemeData lightTheme = ThemeData(
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryColor,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Color(0xff1A1A1A),
-        selectedItemColor: Color(0xffFFBB3B),
-        unselectedItemColor: Color(0xffB5B4B4),
+      textTheme: TextTheme(
+        titleMedium: TextStyle(
+            fontSize: 14, color: Colors.white, fontWeight: FontWeight.normal),
+        bodySmall: TextStyle(fontSize: 10, color: Colors.white),
+        labelLarge: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
       ));
 }

@@ -14,10 +14,14 @@ class Discover extends StatefulWidget {
 }
 
 class _DiscoverState extends State<Discover> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.getMovieDiscover(widget.id ?? ''),
+        future: ApiManager.getMovieDiscover(widget.id??''),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Column(
@@ -27,6 +31,7 @@ class _DiscoverState extends State<Discover> {
             );
           }
           if (snapshot.hasError) {
+
             print(snapshot.error.toString());
 
             return Center(
@@ -45,7 +50,9 @@ class _DiscoverState extends State<Discover> {
             itemCount: ListPost.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 1.4 / 2,
+              childAspectRatio: 1.4/ 2,
+
+
             ),
             itemBuilder: (context, index) {
               return InkWell(
@@ -59,7 +66,8 @@ class _DiscoverState extends State<Discover> {
                       children: [
                         MovieImage(
                             imagePath:
-                                snapshot.data?.results?[index].posterPath ?? '')
+                            snapshot.data?.results?[index].posterPath ??
+                                '')
                       ],
                     ),
                   ),
@@ -70,3 +78,4 @@ class _DiscoverState extends State<Discover> {
         });
   }
 }
+

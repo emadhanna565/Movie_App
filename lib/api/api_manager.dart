@@ -32,7 +32,7 @@ class ApiManager {
     var response = await http.get(uri);
     var jsonString = response.body;
     var recommendedResponse =
-        RecommendedResponse.fromJson(jsonDecode(jsonString));
+    RecommendedResponse.fromJson(jsonDecode(jsonString));
     return recommendedResponse;
   }
 
@@ -73,7 +73,7 @@ class ApiManager {
     var uri = Uri.https(
       baseUrl, '3/discover/movie', {'api_key': apiKey,
       'with_genres': ID.toString()
-      },);
+    },);
     var response = await http.get(uri);
     var jsonString = response.body;
 
@@ -84,7 +84,7 @@ class ApiManager {
 
   static Future<SearchResponse> getsearch( {required String query} ) async {
     var uri = Uri.https(
-        baseUrl, '/3/search/movie', {'api_key': apiKey, 'query':query},);
+      baseUrl, '/3/search/movie', {'api_key': apiKey, 'query':query},);
     print(query);
     var response = await http.get(uri);
     var jsonString = response.body;

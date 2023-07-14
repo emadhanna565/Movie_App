@@ -17,9 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: MyTheme.lightTheme,
       routes: {
+
         SplashScreen.routeName: (_) => SplashScreen(),
         HomeLayout.routeName: (_) => HomeLayout(),
         MovieDetailsScreen.routeName: (_) => MovieDetailsScreen(),
+
       },
       initialRoute: SplashScreen.routeName,
     );

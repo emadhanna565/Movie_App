@@ -39,8 +39,8 @@ class NewReleaseItem extends StatelessWidget {
                         children: [
                           MovieImage(
                               imagePath:
-                                  snapshot.data?.results?[index].posterPath ??
-                                      '')
+                              snapshot.data?.results?[index].posterPath ??
+                                  '')
                         ],
                       ),
                     ),
@@ -53,3 +53,4 @@ class NewReleaseItem extends StatelessWidget {
         });
   }
 }
+

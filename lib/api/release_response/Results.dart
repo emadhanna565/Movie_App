@@ -45,7 +45,7 @@ class Results {
   double? popularity;
   String? posterPath;
   dynamic voteAverage;
-  int? voteCount;
+  dynamic voteCount;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

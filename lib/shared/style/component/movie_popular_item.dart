@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
+import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
 class MoviePopularItem extends StatelessWidget {
@@ -27,14 +28,17 @@ class MoviePopularItem extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+                        arguments: snapshot.data?.results?[index]);
+                  },
                   child: Container(
                       height: MediaQuery.of(context).size.height * 0.40,
                       child: Stack(
                         children: [
                           CachedNetworkImage(
                             imageUrl:
-                                'https://image.tmdb.org/t/p/original${snapshot.data?.results?[index].backdropPath ?? ""}',
+                                'https://image.tmdb.org/t/p/original${snapshot.data?.results?[index].backdropPath}',
                             placeholder: (context, url) => Center(
                               child: CircularProgressIndicator(),
                             ),
@@ -51,7 +55,7 @@ class MoviePopularItem extends StatelessWidget {
                                 'assets/images/play_button.png',
                               ),
                               color: Colors.white,
-                              size: 60,
+                              size: 50,
                             ),
                           ),
                           Align(

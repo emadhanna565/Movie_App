@@ -4,9 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:movie_app/api/movie_response/PopularResponse.dart';
 import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
 import 'package:movie_app/api/release_response/ReleaseResponse.dart';
-import 'package:movie_app/api/genres_response/Genres_response.dart';
-import 'package:movie_app/api/Movie_Discover/MoviceDiscover.dart';
-import 'package:movie_app/api/search_response/Search_response.dart';
 
 class ApiManager {
   //https://api.themoviedb.org/3/movie/popular?api_key=af34928141e5b3e4e11179d3649cdebb
@@ -22,8 +19,8 @@ class ApiManager {
   }
 
   //'https://api.themoviedb.org/3/discover/tv? \api_key=af34928141e5b3e4e11179d3649cdebb
-  static Future<ReleaseResponse> getNewReleasesMovie({ String? q}) async {
-    var uri = Uri.https(baseUrl, '3/discover/tv', {'api_key': apiKey,'q':q });
+  static Future<ReleaseResponse> getNewReleasesMovie() async {
+    var uri = Uri.https(baseUrl, '3/discover/tv', {'api_key': apiKey});
     var response = await http.get(uri);
     var jsonString = response.body;
     var releaseResponse = ReleaseResponse.fromJson(jsonDecode(jsonString));
@@ -37,6 +34,28 @@ class ApiManager {
     var recommendedResponse =
         RecommendedResponse.fromJson(jsonDecode(jsonString));
     return recommendedResponse;
+  }
+
+  static Future<DetailResponse> detailMovie(int movieId) async {
+    var uri = Uri.https(baseUrl, '3/movie/$movieId', {
+      'api_key': apiKey,
+    });
+    var response = await http.get(uri);
+    var jsonString = response.body;
+    var detailResponse = DetailResponse.fromJson(jsonDecode(jsonString));
+    return detailResponse;
+  }
+
+  //'https://api.themoviedb.org/3/movie/238/similar?language=en-US&page=1'
+  static Future<MoreLikeThisResponse> moreLikeThisMovie(int movieId) async {
+    var uri = Uri.https(baseUrl, '/3/movie/$movieId/similar', {
+      'api_key': apiKey,
+    });
+    var response = await http.get(uri);
+    var jsonString = response.body;
+    var moreLikeResponse =
+        MoreLikeThisResponse.fromJson(jsonDecode(jsonString));
+    return moreLikeResponse;
   }
 
   static Future<GenresResponse> getGenres() async {

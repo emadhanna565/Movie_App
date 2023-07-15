@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
-import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
+import 'package:movie_app/api/more_like_response/MoreLikeThisResponse.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
-class RecommendItem extends StatelessWidget {
+class MoreLikeThisMovie extends StatelessWidget {
+  int id;
+
+  MoreLikeThisMovie(this.id);
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<RecommendedResponse>(
-        future: ApiManager.recommendedMovie(),
+    return FutureBuilder<MoreLikeThisResponse>(
+        future: ApiManager.moreLikeThisMovie(id),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -19,10 +23,13 @@ class RecommendItem extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+
           return Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+                List<String>? date =
+                    snapshot.data?.results?[index].releaseDate?.split('-');
                 return InkWell(
                   onTap: () {},
                   child: Container(
@@ -78,14 +85,14 @@ class RecommendItem extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '${snapshot.data?.results?[index].releaseDate?.split('-')}',
+                              date?[0] ?? '',
                               style: TextStyle(color: Colors.white),
                             ),
                             SizedBox(
                               width: 5,
                             ),
                             Text(
-                              '\n${snapshot.data?.results?[index].popularity ?? ''}',
+                              '${snapshot.data?.results?[index].popularity ?? ''}',
                               style: TextStyle(color: Colors.white),
                             ),
                           ],

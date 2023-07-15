@@ -4,7 +4,7 @@ import 'package:movie_app/api/release_response/ReleaseResponse.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
 class NewReleaseItem extends StatelessWidget {
-  NewReleaseItem({Key? key}) : super(key: key);
+  const NewReleaseItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +12,15 @@ class NewReleaseItem extends StatelessWidget {
         future: ApiManager.getNewReleasesMovie(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('omda');
+            print('emad');
             print(snapshot.error.toString());
-            return Center(
+            print('emad');
+            return const Center(
               child: Icon(Icons.error),
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

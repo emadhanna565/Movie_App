@@ -3,7 +3,7 @@ import 'package:movie_app/layout/home/home_layout.dart';
 import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/screens/splash/splash_screen.dart';
 import 'package:movie_app/shared/style/theme/myTheme.dart';
-
+import 'package:movie_app/screens/category/Genre_screen.dart';
 void main() {
   runApp(const MyApp());
 }

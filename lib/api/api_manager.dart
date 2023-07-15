@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:movie_app/api/details_response/DetailResponse.dart';
-import 'package:movie_app/api/more_like_response/MoreLikeThisResponse.dart';
 import 'package:movie_app/api/movie_response/PopularResponse.dart';
 import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
 import 'package:movie_app/api/release_response/ReleaseResponse.dart';
@@ -58,5 +56,40 @@ class ApiManager {
     var moreLikeResponse =
         MoreLikeThisResponse.fromJson(jsonDecode(jsonString));
     return moreLikeResponse;
+  }
+
+  static Future<GenresResponse> getGenres() async {
+    try {
+      var uri = Uri.https(baseUrl, '3/genre/movie/list', {'api_key': apiKey});
+      var response = await http.get(uri);
+      var jsonString = response.body;
+      var genresResponse = GenresResponse.fromJson(jsonDecode(jsonString));
+      return genresResponse;
+    } catch (e) {
+      throw e;
+    }
+  }
+  static Future<MoviceDiscover> getMovieDiscover(dynamic ID) async {
+    var uri = Uri.https(
+      baseUrl, '3/discover/movie', {'api_key': apiKey,
+      'with_genres': ID.toString()
+      },);
+    var response = await http.get(uri);
+    var jsonString = response.body;
+
+    var Discoverresponse = MoviceDiscover.fromJson(jsonDecode(jsonString));
+
+    return Discoverresponse;
+  }
+
+  static Future<SearchResponse> getsearch( {required String query} ) async {
+    var uri = Uri.https(
+        baseUrl, '/3/search/movie', {'api_key': apiKey, 'query':query},);
+    print(query);
+    var response = await http.get(uri);
+    var jsonString = response.body;
+    var searchresponse = SearchResponse.fromJson(jsonDecode(jsonString));
+
+    return searchresponse;
   }
 }

@@ -12,9 +12,8 @@ class NewReleaseItem extends StatelessWidget {
         future: ApiManager.getNewReleasesMovie(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('emad');
+            print('omda');
             print(snapshot.error.toString());
-            print('emad');
             return Center(
               child: Icon(Icons.error),
             );

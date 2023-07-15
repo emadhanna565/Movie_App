@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/layout/home/home_layout.dart';
+import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/screens/splash/splash_screen.dart';
 import 'package:movie_app/shared/style/theme/myTheme.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (_) => SplashScreen(),
         HomeLayout.routeName: (_) => HomeLayout(),
+        MovieDetailsScreen.routeName: (_) => MovieDetailsScreen(),
       },
       initialRoute: SplashScreen.routeName,
     );

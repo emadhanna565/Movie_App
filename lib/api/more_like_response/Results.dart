@@ -1,17 +1,17 @@
 /// adult : false
-/// backdrop_path : "/tmU7GeKVybMWFButWEGl2M4GeiP.jpg"
-/// genre_ids : [18,80]
-/// id : 238
-/// original_language : "en"
-/// original_title : "The Godfather"
-/// overview : "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge."
-/// popularity : 114.574
-/// poster_path : "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
-/// release_date : "1972-03-14"
-/// title : "The Godfather"
+/// backdrop_path : null
+/// genre_ids : [18]
+/// id : 257549
+/// original_language : "hu"
+/// original_title : "Ajándék ez a nap"
+/// overview : "Irén and Attila, a not-so-young couple, are in love. All they want is a flat of their own where they could live together. Unfortunately, Hungary in the 70s is no place for dreams."
+/// popularity : 0.6
+/// poster_path : "/89cHz7WWomCcpFR4peUDCbWvQ7j.jpg"
+/// release_date : "1979-12-06"
+/// title : "A Priceless Day"
 /// video : false
-/// vote_average : 8.7
-/// vote_count : 18169
+/// vote_average : 7.7
+/// vote_count : 3
 
 class Results {
   Results({
@@ -49,7 +49,7 @@ class Results {
   }
 
   bool? adult;
-  String? backdropPath;
+  dynamic backdropPath;
   List<int>? genreIds;
   int? id;
   String? originalLanguage;
@@ -61,7 +61,7 @@ class Results {
   String? title;
   bool? video;
   dynamic voteAverage;
-  int? voteCount;
+  dynamic voteCount;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

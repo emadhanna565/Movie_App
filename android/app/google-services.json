@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1016243983347",
+    "project_id": "moviceapp",
+    "storage_bucket": "moviceapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016243983347:android:883b51caa705c8543e7886",
+        "android_client_info": {
+          "package_name": "com.example.movie_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016243983347-8763ilj7m7ap6a2ombn744s81tj898u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArj1lXrsjEWupjjH0N7ERXgKShDipPOcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016243983347-8763ilj7m7ap6a2ombn744s81tj898u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

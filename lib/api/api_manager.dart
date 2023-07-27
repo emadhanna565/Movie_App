@@ -4,6 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:movie_app/api/movie_response/PopularResponse.dart';
 import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
 import 'package:movie_app/api/release_response/ReleaseResponse.dart';
+import 'package:movie_app/api/search_response/Search_response.dart';
+
+import 'Movie_Discover/MoviceDiscover.dart';
+import 'details_response/DetailResponse.dart';
+import 'genres_response/Genres_response.dart';
+import 'more_like_response/MoreLikeThisResponse.dart';
 
 class ApiManager {
   //https://api.themoviedb.org/3/movie/popular?api_key=af34928141e5b3e4e11179d3649cdebb

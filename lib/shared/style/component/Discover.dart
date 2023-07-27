@@ -5,6 +5,10 @@ import 'package:movie_app/api/Movie_Discover/MoviceDiscover.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 import 'package:movie_app/api/genres_response/Genres_response.dart';
 import 'package:movie_app/screens/category/Genre_screen.dart';
+import 'package:movie_app/local_database/modle/list_watch.dart';
+import 'package:hive/hive.dart';
+
+import '../../../main.dart';
 
 class Discover extends StatefulWidget {
   dynamic id;
@@ -14,14 +18,10 @@ class Discover extends StatefulWidget {
 }
 
 class _DiscoverState extends State<Discover> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.getMovieDiscover(widget.id??''),
+        future: ApiManager.getMovieDiscover(widget.id ?? ''),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Column(
@@ -31,7 +31,6 @@ class _DiscoverState extends State<Discover> {
             );
           }
           if (snapshot.hasError) {
-
             print(snapshot.error.toString());
 
             return Center(
@@ -50,13 +49,25 @@ class _DiscoverState extends State<Discover> {
             itemCount: ListPost.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 1.4/ 2,
-
-
+              childAspectRatio: 1.4 / 2,
             ),
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: () {},
+                onTap: () async {
+                 try {
+                    await Hive.box<ListWatch>(watch).add(ListWatch(
+                        title: snapshot.data?.results![index].title,
+                        releaseDate: snapshot.data?.results?[index].releaseDate,
+                        posterPath: snapshot.data?.results?[index].posterPath));
+                  }
+                  catch(e){
+                   print(e);
+                  }
+
+                  setState(() {
+
+                  });
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: ClipRRect(
@@ -66,8 +77,7 @@ class _DiscoverState extends State<Discover> {
                       children: [
                         MovieImage(
                             imagePath:
-                            snapshot.data?.results?[index].posterPath ??
-                                '')
+                                snapshot.data?.results?[index].posterPath ?? '')
                       ],
                     ),
                   ),
@@ -78,4 +88,3 @@ class _DiscoverState extends State<Discover> {
         });
   }
 }
-

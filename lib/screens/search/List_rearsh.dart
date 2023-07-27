@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
 
 import '../../api/Movie_Discover/MoviceDiscover.dart';
+import '../../shared/style/component/list_container.dart';
 
 class ListSearch extends StatefulWidget {
   dynamic query;
@@ -39,57 +40,12 @@ class _ListSearchState extends State<ListSearch> {
             ),
             itemCount: ListPost.length,
             itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Container(
-                    height: 80,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://image.tmdb.org/t/p/original${ListPost[index].posterPath}'),
-                            fit: BoxFit.cover)),
-
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: 200,
-                            child: Text(
-                              ListPost[index].title ?? '',
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(height: 15,width: 200,
-                        child: Text(
-                          ListPost[index].releaseDate ?? '',
-                          style: const TextStyle(
-                              fontSize: 12, color: Colors.white),textAlign:TextAlign.start ,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-                    ],
-                  ),
-                ],
-              );
+              return List_Container(title:ListPost[index].title ,posterPath: ListPost[index].posterPath,releaseDate: ListPost[index].releaseDate,);
             },
           );
         });
   }
 }
+//{ListPost[index].posterPath
+// ListPost[index].title
+// ListPost[index].releaseDate

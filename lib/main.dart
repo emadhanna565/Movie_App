@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+
 import 'package:movie_app/layout/home/home_layout.dart';
-import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/screens/splash/splash_screen.dart';
 import 'package:movie_app/shared/style/theme/myTheme.dart';
 import 'package:movie_app/screens/category/Genre_screen.dart';
-void main() {
-  runApp(const MyApp());
+
+import 'local_database/modle/list_watch.dart';
+const watch='watch';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox<ListWatch>(watch);
+  Hive.registerAdapter(ListWatchAdapter());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +29,8 @@ class MyApp extends StatelessWidget {
 
         SplashScreen.routeName: (_) => SplashScreen(),
         HomeLayout.routeName: (_) => HomeLayout(),
-        MovieDetailsScreen.routeName: (_) => MovieDetailsScreen(),
 
       },
       initialRoute: SplashScreen.routeName,
     );
-  }
-}
+  }}

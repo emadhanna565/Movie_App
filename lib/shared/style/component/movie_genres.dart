@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
 import 'package:movie_app/api/genres_response/Genres_response.dart';
-import 'package:movie_app/screens/category/Genre_screen.dart';
-import 'package:movie_app/shared/style/component/Container_catagery.dart';
+import 'package:movie_app/shared/style/component/Container_category.dart';
+
 class Movice_genres extends StatelessWidget {
 
   Genres? genres;
@@ -25,28 +25,30 @@ class Movice_genres extends StatelessWidget {
           );
         }
         var response = snapshot.data;
-        var ListGenres = response?.genres ?? [];
+        var listGenres = response?.genres ?? [];
         return Column(
-          children: [ const Row(
-            children: [
-              Text(
-                'Browse category',
-                style: TextStyle(
-                    fontSize: 25, fontWeight: FontWeight.w700, color: Colors.white),
-              ),
-            ],
-          ),
-            const SizedBox(height: 10,),
+          children: [
+            const Text(
+              'Browse category',
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: GridView.builder(
-                itemCount: ListGenres.length,
+                itemCount: listGenres.length,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
                     childAspectRatio: 3 / 2,
                     crossAxisSpacing: 30,
                     mainAxisSpacing: 30),
                 itemBuilder: (context, index) {
-                  return Container_catagery(ListGenres[index].name??'', ListGenres[index], context);
+                  return Container_catagery(
+                      listGenres[index].name ?? '', listGenres[index], context);
                 },
               ),
             ),

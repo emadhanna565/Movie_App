@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
-import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
+import 'package:movie_app/api/more_like_response/MoreLikeThisResponse.dart';
 import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
-class RecommendItem extends StatelessWidget {
+class MoreLikeThisMovie extends StatelessWidget {
+  int id;
+
+  MoreLikeThisMovie(this.id);
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<RecommendedResponse>(
-        future: ApiManager.recommendedMovie(),
+    return FutureBuilder<MoreLikeThisResponse>(
+        future: ApiManager.moreLikeThisMovie(id),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -20,6 +24,7 @@ class RecommendItem extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+
           return Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -28,8 +33,11 @@ class RecommendItem extends StatelessWidget {
                     snapshot.data?.results?[index].releaseDate?.split('-');
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, MovieDetailsScreen.routeName,
-                        arguments: snapshot.data?.results?[index]);
+                    Navigator.pushNamed(
+                      context,
+                      MovieDetailsScreen.routeName,
+                      arguments: snapshot.data?.results?[index],
+                    );
                   },
                   child: Container(
                     decoration: ShapeDecoration(
@@ -50,7 +58,7 @@ class RecommendItem extends StatelessWidget {
                                     topLeft: Radius.circular(15)),
                                 child: MovieImage(
                                     imagePath: snapshot
-                                        .data?.results?[index].posterPath ??
+                                            .data?.results?[index].posterPath ??
                                         ''))
                           ],
                         ),
@@ -81,21 +89,20 @@ class RecommendItem extends StatelessWidget {
                         SizedBox(
                           height: 2,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                date![0],
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                '${snapshot.data?.results?[index].popularity ?? ''}',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              date?[0] ?? '',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${snapshot.data?.results?[index].popularity ?? ''}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
                       ],
                     ),

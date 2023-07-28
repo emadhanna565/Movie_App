@@ -1,9 +1,14 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:movie_app/api/Movie_Discover/MoviceDiscover.dart';
+import 'package:movie_app/api/details_response/DetailResponse.dart';
+import 'package:movie_app/api/genres_response/Genres_response.dart';
+import 'package:movie_app/api/more_like_response/MoreLikeThisResponse.dart';
 import 'package:movie_app/api/movie_response/PopularResponse.dart';
 import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
 import 'package:movie_app/api/release_response/ReleaseResponse.dart';
+import 'package:movie_app/api/search_response/Search_response.dart';
 
 class ApiManager {
   //https://api.themoviedb.org/3/movie/popular?api_key=af34928141e5b3e4e11179d3649cdebb
@@ -18,9 +23,9 @@ class ApiManager {
     return popularResponse;
   }
 
-  //'https://api.themoviedb.org/3/discover/tv? \api_key=af34928141e5b3e4e11179d3649cdebb
+  //https://api.themoviedb.org/3/movie/now_playing
   static Future<ReleaseResponse> getNewReleasesMovie() async {
-    var uri = Uri.https(baseUrl, '3/discover/tv', {'api_key': apiKey});
+    var uri = Uri.https(baseUrl, '3/movie/now_playing', {'api_key': apiKey});
     var response = await http.get(uri);
     var jsonString = response.body;
     var releaseResponse = ReleaseResponse.fromJson(jsonDecode(jsonString));

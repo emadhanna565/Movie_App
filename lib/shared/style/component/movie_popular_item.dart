@@ -27,6 +27,8 @@ class MoviePopularItem extends StatelessWidget {
               itemCount: snapshot.data?.results?.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+                List<String>? date =
+                    snapshot.data?.results?[index].releaseDate?.split('-');
                 return InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, MovieDetailsScreen.routeName,
@@ -36,27 +38,31 @@ class MoviePopularItem extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.40,
                       child: Stack(
                         children: [
-                          CachedNetworkImage(
-                            imageUrl:
-                                'https://image.tmdb.org/t/p/original${snapshot.data?.results?[index].backdropPath}',
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            errorWidget: (context, url, eror) => Center(
-                              child: Icon(Icons.error),
-                            ),
-                            height: MediaQuery.of(context).size.height * 0.30,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
-                          ),
-                          Center(
-                            child: ImageIcon(
-                              AssetImage(
-                                'assets/images/play_button.png',
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl:
+                                    'https://image.tmdb.org/t/p/original${snapshot.data?.results?[index].backdropPath}',
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, eror) => Center(
+                                  child: Icon(Icons.error),
+                                ),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.30,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.fill,
                               ),
-                              color: Colors.white,
-                              size: 50,
-                            ),
+                              ImageIcon(
+                                AssetImage(
+                                  'assets/images/play_button.png',
+                                ),
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ],
                           ),
                           Align(
                             alignment: Alignment.bottomLeft,
@@ -69,7 +75,7 @@ class MoviePopularItem extends StatelessWidget {
                                   ),
                                   child: MovieImage(
                                       imagePath: snapshot.data?.results?[index]
-                                              .posterPath ??
+                                          .posterPath ??
                                           ''),
                                 ),
                                 Padding(
@@ -77,7 +83,7 @@ class MoviePopularItem extends StatelessWidget {
                                       left: 15, bottom: 15),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
@@ -90,11 +96,24 @@ class MoviePopularItem extends StatelessWidget {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                        '2019   PG-13  2h 7m',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            date![0],
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          ),
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Text(
+                                            '${snapshot.data?.results?[index].popularity}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

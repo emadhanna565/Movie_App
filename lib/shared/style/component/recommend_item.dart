@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
 import 'package:movie_app/api/recommend_response/RecommendedResponse.dart';
+import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
 class RecommendItem extends StatelessWidget {
@@ -23,8 +24,13 @@ class RecommendItem extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+                List<String>? date =
+                    snapshot.data?.results?[index].releaseDate?.split('-');
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+                        arguments: snapshot.data?.results?[index]);
+                  },
                   child: Container(
                     decoration: ShapeDecoration(
                         color: Color(0xff343534),
@@ -44,7 +50,7 @@ class RecommendItem extends StatelessWidget {
                                     topLeft: Radius.circular(15)),
                                 child: MovieImage(
                                     imagePath: snapshot
-                                            .data?.results?[index].posterPath ??
+                                        .data?.results?[index].posterPath ??
                                         ''))
                           ],
                         ),
@@ -75,20 +81,21 @@ class RecommendItem extends StatelessWidget {
                         SizedBox(
                           height: 2,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              '${snapshot.data?.results?[index].releaseDate?.split('-')}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '\n${snapshot.data?.results?[index].popularity ?? ''}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                date![0],
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Text(
+                                '${snapshot.data?.results?[index].popularity ?? ''}',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

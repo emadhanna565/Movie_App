@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
 import 'package:movie_app/api/more_like_response/MoreLikeThisResponse.dart';
+import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
 class MoreLikeThisMovie extends StatelessWidget {
@@ -31,7 +32,13 @@ class MoreLikeThisMovie extends StatelessWidget {
                 List<String>? date =
                     snapshot.data?.results?[index].releaseDate?.split('-');
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      MovieDetailsScreen.routeName,
+                      arguments: snapshot.data?.results?[index],
+                    );
+                  },
                   child: Container(
                     decoration: ShapeDecoration(
                         color: Color(0xff343534),

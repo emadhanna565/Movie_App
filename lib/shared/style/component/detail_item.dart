@@ -15,7 +15,10 @@ class DetailItem extends StatelessWidget {
       future: ApiManager.detailMovie(idMovie),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(
+          print('________________________');
+          print(snapshot.error.toString());
+          print('________________________');
+          return const Center(
             child: Icon(
               Icons.error,
               color: Colors.white,
@@ -23,7 +26,7 @@ class DetailItem extends StatelessWidget {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -37,12 +40,12 @@ class DetailItem extends StatelessWidget {
                   imageUrl:
                       'https://image.tmdb.org/t/p/original${snapshot.data?.backdropPath}',
                   placeholder: (context, url) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
                   errorWidget: (context, url, error) {
-                    return Center(
+                    return const Center(
                       child: Icon(Icons.error),
                     );
                   },
@@ -50,14 +53,14 @@ class DetailItem extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.fill,
                 ),
-                ImageIcon(
+                const ImageIcon(
                   AssetImage('assets/images/play_button.png'),
                   color: Colors.white,
                   size: 50,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -67,48 +70,48 @@ class DetailItem extends StatelessWidget {
                 children: [
                   Text(
                     snapshot.data?.title ?? '',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
                       Text(
                         '${date?[0]}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Text(
                         '${snapshot.data?.popularity}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,
                         ),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
                         child: MovieImage(
                             imagePath: '${snapshot.data?.posterPath}'),
-                        borderRadius: BorderRadius.circular(10),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 12, top: 12),
+                        padding: const EdgeInsets.only(left: 12, top: 12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -121,8 +124,8 @@ class DetailItem extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 4),
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 4),
                                       height: 30,
                                       width: 70,
                                       decoration: BoxDecoration(
@@ -134,7 +137,8 @@ class DetailItem extends StatelessWidget {
                                         child: Text(
                                           snapshot.data?.genres?[index].name ??
                                               '',
-                                          style: TextStyle(color: Colors.white),
+                                          style: const TextStyle(
+                                              color: Colors.white),
                                         ),
                                       ),
                                     );
@@ -142,7 +146,7 @@ class DetailItem extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Container(
@@ -151,26 +155,26 @@ class DetailItem extends StatelessWidget {
                                 snapshot.data?.overview ?? '',
                                 softWrap: true,
                                 maxLines: 5,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   color: Colors.yellow,
                                   size: 30,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 Text(
                                   '${snapshot.data?.voteAverage}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
                                   ),

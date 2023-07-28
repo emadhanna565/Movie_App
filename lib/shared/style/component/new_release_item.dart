@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/api_manager.dart';
 import 'package:movie_app/api/release_response/ReleaseResponse.dart';
+import 'package:movie_app/screens/movie_details/movie_details_screen.dart';
 import 'package:movie_app/shared/style/component/movie_image.dart';
 
 class NewReleaseItem extends StatelessWidget {
@@ -12,9 +13,6 @@ class NewReleaseItem extends StatelessWidget {
         future: ApiManager.getNewReleasesMovie(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('emad');
-            print(snapshot.error.toString());
-            print('emad');
             return const Center(
               child: Icon(Icons.error),
             );
@@ -29,9 +27,15 @@ class NewReleaseItem extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      MovieDetailsScreen.routeName,
+                      arguments: snapshot.data?.results?[index],
+                    );
+                  },
                   child: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Stack(
